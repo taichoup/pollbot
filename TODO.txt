@@ -1,0 +1,3 @@
+- enlever la clé d'API du repo
+- le bot doit comprendre une syntaxe
+- et ensuite faire des trucs avec
