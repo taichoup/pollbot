@@ -22,28 +22,35 @@ bot.on("message", function(data) {
 });
 
 function handleMessage(message) {
-    switch(message) {
-        case "hi":
-        case "hello":
-            sendGreeting();
-            break;
-        default:
-            return;
+    if (message.indexOf("pollbot") > -1) {
+        var spl = message.split("\"");
+        var l = spl.length;
+        var spl2 = [];
+        for (var i = 1; i < l; i += 2) {
+            spl2.push(spl[i]);
+        }
+        // console.log(spl2);
+        sendPoll(spl2);
     }
 }
 
-function sendGreeting() {
-    var greeting = getGreeting();
-    bot.postMessageToChannel(channel, greeting);
+const numberemojis = {
+    1: ":one:",
+    2: ":two:",
+    3: ":three:",
+    4: ":four:",
+    5: ":five:",
+    6: ":six:",
+    7: ":seven:",
+    8: ":eight:",
+    9: ":nine:"
 }
 
-function getGreeting() {
-    var greetings = [
-        "hello!",
-        "hi there!",
-        "cheerio!",
-        "how do you do!",
-        "coucou!"
-    ];
-    return greetings[Math.floor(Math.random() * greetings.length)];
-}
+function sendPoll(arr) {
+    var poll = "*" + arr[0] + "*";
+    for (i = 1; i < arr.length; i++) {
+        poll += "\n" + numberemojis[i] + " " + arr[i];
+    }
+
+    bot.postMessageToChannel(channel, poll);
+};
