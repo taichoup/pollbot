@@ -1,8 +1,9 @@
+require('dotenv').config();
 var Slackbot = require("slackbots");
 var channel = "general";
 
 var bot = new Slackbot({
-    token: "xoxb-509882773761-510486476098-3jbQcUrfdTLIGR47JxebVEKW",
+    token: process.env.API_KEY,
     name: "testpollbot"
 });
 
